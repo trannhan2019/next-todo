@@ -1,11 +1,11 @@
+import { create } from "@/actions/todo.action";
 import { Button, Group, TextInput } from "@mantine/core";
-import React from "react";
 
 const AddTodoForm = () => {
   return (
-    <form action="">
+    <form action={create}>
       <Group align="center">
-        <TextInput placeholder="Add Todo" />
+        <TextInput placeholder="Add Todo" name="input" />
         <Button size="sm" type="submit">
           Add Todo
         </Button>
