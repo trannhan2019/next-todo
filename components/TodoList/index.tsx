@@ -1,15 +1,17 @@
 import { todoType } from "@/types/todo.type";
-import React from "react";
 import Todo from "../Todo";
 
 interface Props {
-  todoList: todoType[];
+  todos: todoType[];
+  total: string;
+  pages: string;
 }
 
-const TodoList = ({ todoList }: Props) => {
+const TodoList = ({ data }: any) => {
+  // console.log(data);
   return (
     <>
-      {todoList.map((todo: todoType) => (
+      {data?.todos?.map((todo: todoType) => (
         <Todo key={todo.id} todo={todo} />
       ))}
     </>

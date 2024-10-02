@@ -7,7 +7,7 @@ interface Props {
 }
 const Todo = ({ todo }: Props) => {
   return (
-    <Button my={20} size="sm" radius="md" fullWidth>
+    <Button variant="subtle" my={20} size="sm" radius="md" fullWidth>
       {todo.title}
     </Button>
   );

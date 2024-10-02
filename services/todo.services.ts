@@ -1,0 +1,46 @@
+import { URL_API } from "@/contants/contants";
+
+export const createTodo = async (title: string) => {
+  return await fetch(`${URL_API}/todo}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ title }),
+  });
+};
+
+export const getTodos = async () => {
+  const res = await fetch(`${URL_API}/todo`, { method: "GET" });
+  return res.json();
+};
+
+export const deleteTodo = async (id: string) => {
+  return await fetch(`/api/todo/${id}`, {
+    method: "DELETE",
+  });
+};
+
+export const updateTodo = async (id: string, isCompleted: boolean) => {
+  return await fetch(`/api/todo/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ isCompleted }),
+  });
+};
+
+export const updateTitle = async (id: string, title: string) => {
+  return await fetch(`/api/todo/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ title }),
+  });
+};
+
+export const getTodo = async (id: string) => {
+  return await fetch(`/api/todo/${id}`);
+};

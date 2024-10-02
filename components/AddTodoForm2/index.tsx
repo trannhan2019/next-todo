@@ -7,6 +7,7 @@ import { notifications } from "@mantine/notifications";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { useRouter } from "next/navigation";
 import { todoAddSchema } from "@/validate-rules/todo";
+import { createTodo } from "@/services/todo.services";
 
 const AddTodoForm2 = () => {
   const router = useRouter();
@@ -22,13 +23,7 @@ const AddTodoForm2 = () => {
   const onSubmit = async (values: any) => {
     console.log(values);
     try {
-      const res = await fetch("/api/todo", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const res = await createTodo(values.title);
 
       if (res.ok) {
         router.refresh();

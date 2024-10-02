@@ -38,3 +38,31 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "5");
+    const skip = (page - 1) * limit;
+    const take = limit;
+
+    const todos = await prisma.todo.findMany({
+      skip,
+      take,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    const total = await prisma.todo.count();
+    const pages = Math.ceil(total / limit);
+    return NextResponse.json({ todos, total, pages });
+  } catch (error) {
+    console.error("Error fetching photos:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch photos" },
+      { status: 500 }
+    );
+  }
+}
