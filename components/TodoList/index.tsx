@@ -7,11 +7,11 @@ interface Props {
   pages: string;
 }
 
-const TodoList = ({ data }: any) => {
+const TodoList = ({ todos }: any) => {
   // console.log(data);
   return (
     <>
-      {data?.todos?.map((todo: todoType) => (
+      {todos?.map((todo: todoType) => (
         <Todo key={todo.id} todo={todo} />
       ))}
     </>

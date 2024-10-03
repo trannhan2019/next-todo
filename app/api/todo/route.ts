@@ -56,8 +56,9 @@ export async function GET(request: NextRequest) {
     });
 
     const total = await prisma.todo.count();
-    const pages = Math.ceil(total / limit);
-    return NextResponse.json({ todos, total, pages });
+    const totalPages = Math.ceil(total / limit);
+    // const pages = Math.ceil(total / limit);
+    return NextResponse.json({ todos, totalPages });
   } catch (error) {
     console.error("Error fetching photos:", error);
     return NextResponse.json(

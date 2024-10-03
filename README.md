@@ -39,3 +39,12 @@ hoan thanh api get pagination
 
 -> get query router
 -> router push component panigate
+-> page change
+-> search
+-> sap xep
+-> edit modal
+-> delete
+-> auth
+-> permission
+
+sau nay nhieu page dung pagination thi tao hook dung chung
