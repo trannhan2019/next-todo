@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 const TodoPage = async ({ searchParams }: any) => {
   const data = await getTodos(searchParams);
 
-  // console.log(data?.totalPages);
+  // console.log("todos tu page todo o server component", data);
 
   return (
     <div className={classes.wrapper}>

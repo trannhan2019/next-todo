@@ -59,11 +59,12 @@ export async function PATCH(request: NextRequest, { params }: Props) {
       return NextResponse.json({ message: "Todo not found" }, { status: 404 });
     }
 
-    const { title } = body;
+    const { title, isCompleted } = body;
     const todoUpdate = await prisma.todo.update({
       where: { id: todo.id },
       data: {
         title,
+        isCompleted,
       },
     });
 
