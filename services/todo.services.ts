@@ -1,12 +1,12 @@
 import { URL_API } from "@/contants/contants";
 
-export const createTodo = async (title: string) => {
-  return await fetch(`${URL_API}/todo}`, {
+export const createTodo = async (values: any) => {
+  return await fetch(`${URL_API}/todo`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title }),
+    body: JSON.stringify(values),
   });
 };
 

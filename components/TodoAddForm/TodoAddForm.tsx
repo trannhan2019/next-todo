@@ -8,8 +8,10 @@ import { zodResolver } from "mantine-form-zod-resolver";
 import { useRouter } from "next/navigation";
 import { todoAddSchema } from "@/validate-rules/todo";
 import { createTodo } from "@/services/todo.services";
+import { useState } from "react";
 
-const AddTodoForm2 = () => {
+const TodoAddForm = () => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const form = useForm({
@@ -21,13 +23,15 @@ const AddTodoForm2 = () => {
   });
 
   const onSubmit = async (values: any) => {
-    console.log(values);
+    // console.log(values);
+    setLoading(true);
     try {
-      const res = await createTodo(values.title);
+      const res = await createTodo(values);
 
       if (res.ok) {
         router.refresh();
         form.reset();
+        setLoading(false);
         notifications.show({
           title: "Success",
           message: "Todo added successfully",
@@ -35,6 +39,7 @@ const AddTodoForm2 = () => {
         });
       } else {
         console.log("Error while Registeing", res);
+        setLoading(false);
         notifications.show({
           title: "Error",
           message: "Error while Registeing",
@@ -56,7 +61,7 @@ const AddTodoForm2 = () => {
             {...form.getInputProps("title")}
           />
         </FocusTrap>
-        <Button size="sm" type="submit">
+        <Button size="sm" loading={loading} type="submit">
           Add Todo
         </Button>
       </Group>
@@ -64,4 +69,4 @@ const AddTodoForm2 = () => {
   );
 };
 
-export default AddTodoForm2;
+export default TodoAddForm;

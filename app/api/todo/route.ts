@@ -11,7 +11,7 @@ import { todoAddSchema } from "@/validate-rules/todo";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log(body);
+    // console.log(body);
     const validation = todoAddSchema.safeParse(body);
 
     if (!validation.success) {
