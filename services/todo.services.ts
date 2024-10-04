@@ -13,6 +13,7 @@ export const createTodo = async (title: string) => {
 export const getTodos = async (params: any) => {
   const res = await fetch(`${URL_API}/todo?${new URLSearchParams(params)}`, {
     method: "GET",
+    cache: "no-store",
   });
   return res.json();
 };

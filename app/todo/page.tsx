@@ -6,6 +6,7 @@ import TodoList from "@/components/TodoList";
 import AddTodoForm2 from "@/components/AddTodoForm2";
 import { getTodos } from "@/services/todo.services";
 import TodoPagination from "@/components/TodoPanigation";
+import TodoSearch from "@/components/TodoSearch/TodoSearch";
 
 // const prisma = new PrismaClient();
 // async function getData() {
@@ -33,6 +34,7 @@ const TodoPage = async ({ searchParams }: any) => {
         <Title mb={"md"} order={1}>
           Todo App
         </Title>
+        <TodoSearch />
         <AddTodoForm2 />
         <TodoList todos={data?.todos as any} />
         <TodoPagination total={data?.totalPages} />

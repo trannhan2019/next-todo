@@ -46,8 +46,19 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "5");
     const skip = (page - 1) * limit;
     const take = limit;
+    const search = searchParams.get("search") || "";
 
+    let where: any = {};
+    if (search) {
+      where = {
+        title: {
+          contains: search,
+          mode: "insensitive",
+        },
+      };
+    }
     const todos = await prisma.todo.findMany({
+      where,
       skip,
       take,
       orderBy: {
@@ -55,7 +66,7 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    const total = await prisma.todo.count();
+    const total = await prisma.todo.count({ where });
     const totalPages = Math.ceil(total / limit);
     // const pages = Math.ceil(total / limit);
     return NextResponse.json({ todos, totalPages });

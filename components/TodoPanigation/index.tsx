@@ -1,6 +1,6 @@
 "use client";
 import useUrlParams from "@/hooks/useUrlParams";
-import { Group, Pagination, Select } from "@mantine/core";
+import { Group, Pagination, NativeSelect } from "@mantine/core";
 import { usePathname, useRouter } from "next/navigation";
 
 const TodoPagination = ({ total }: any) => {
@@ -8,7 +8,7 @@ const TodoPagination = ({ total }: any) => {
   const router = useRouter();
   const path = usePathname();
   const params = useUrlParams();
-  console.log(params);
+  // console.log(params);
   const onChange = (page: number) => {
     const newParams = new URLSearchParams({ ...params, page: page.toString() });
     router.push(`${path}?${newParams.toString()}`);
@@ -28,31 +28,30 @@ const TodoPagination = ({ total }: any) => {
     router.push(`${path}?${newParams.toString()}`);
   };
 
-  const onSelectChange = (value: any) => {
-    const newParams = new URLSearchParams({ ...params, limit: value });
+  const onSelectChange = (event: any) => {
+    const newParams = new URLSearchParams({
+      ...params,
+      limit: event.currentTarget.value,
+    });
     router.push(`${path}?${newParams.toString()}`);
   };
 
   return (
     <Group>
-      <Pagination.Root
+      <Pagination
+        withEdges
+        withControls={false}
         total={Number(total)}
+        value={Number(params?.page || 1)}
         onChange={onChange}
         onFirstPage={onFirstPage}
         onLastPage={onLastPage}
-      >
-        <Group gap={5} justify="center">
-          <Pagination.First />
-          <Pagination.Items />
-          <Pagination.Last />
-        </Group>
-      </Pagination.Root>
+      />
 
-      <Select
-        placeholder="Select value"
+      <NativeSelect
         data={["3", "5"]}
-        onChange={onSelectChange}
-        defaultSearchValue="3"
+        value={params?.limit || "5"}
+        onChange={(event) => onSelectChange(event)}
         w={80}
       />
     </Group>
