@@ -39,6 +39,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
+//2. GET TODO API SU DUNG CHO CAC API CAC THIET BI KHAC KET NOI NHU MOBILE, APP...
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);

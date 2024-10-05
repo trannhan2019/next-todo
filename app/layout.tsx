@@ -6,6 +6,7 @@ import { MantineProvider } from "@mantine/core";
 import type { Metadata } from "next";
 import { Notifications } from "@mantine/notifications";
 import { ModalsProvider } from "@mantine/modals";
+import { NextAuthProvider } from "@/providers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +24,7 @@ export default function RootLayout({
         <MantineProvider theme={theme}>
           <Notifications />
           <ModalsProvider />
-          {children}
+          <NextAuthProvider>{children}</NextAuthProvider>
         </MantineProvider>
       </body>
     </html>

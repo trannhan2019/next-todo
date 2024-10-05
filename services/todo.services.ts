@@ -1,5 +1,4 @@
-import { URL_API } from "@/contants/contants";
-import { title } from "process";
+import { URL_API } from "@/lib/contants";
 
 export const createTodo = async (values: any) => {
   return await fetch(`${URL_API}/todo`, {

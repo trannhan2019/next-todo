@@ -2,7 +2,14 @@
 
 import { modals } from "@mantine/modals";
 import { todoType } from "@/types/todo.type";
-import { Button, ButtonGroup, Group, Text } from "@mantine/core";
+import {
+  Button,
+  ButtonGroup,
+  Group,
+  Text,
+  Title,
+  UnstyledButton,
+} from "@mantine/core";
 import { IconCancel, IconEdit } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import TodoEditModal from "../TodoEditModal/TodoEditModal";
@@ -53,21 +60,17 @@ const Todo = ({ todo }: Props) => {
   return (
     <>
       <Group justify="space-between">
-        <Button
-          variant="subtle"
-          my={10}
-          size="sm"
-          radius="md"
-          color={todo?.isCompleted ? "green" : "gray"}
-        >
-          {todo.title}
-        </Button>
+        <UnstyledButton variant="subtle">
+          <Text py={10} c={todo.isCompleted ? "green" : ""}>
+            {todo.title}
+          </Text>
+        </UnstyledButton>
 
         <ButtonGroup>
-          <Button variant="outline" onClick={open}>
+          <Button variant="white" onClick={open}>
             <IconEdit size={18} />
           </Button>
-          <Button variant="outline" onClick={openModal}>
+          <Button variant="white" onClick={openModal}>
             <IconCancel size={18} color="red" />
           </Button>
         </ButtonGroup>

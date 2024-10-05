@@ -5,3 +5,8 @@ export type todoType = {
   updatedAt?: Date | null;
   createdAt?: Date;
 };
+
+export type todoPaginationParamsType = {
+  page?: number;
+  limit?: number;
+};
