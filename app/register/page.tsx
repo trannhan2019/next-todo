@@ -1,8 +1,16 @@
 import RegisterForm from "@/components/RegisterForm/RegisterForm";
+import { authOptions } from "@/lib/auth";
 import { Anchor, Paper, Title, Text, Container } from "@mantine/core";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/");
+  }
   return (
     <Container size={420} my={60}>
       <Title ta="center">Register Your Account</Title>

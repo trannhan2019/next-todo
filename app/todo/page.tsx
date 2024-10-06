@@ -1,4 +1,4 @@
-import { Paper, Title } from "@mantine/core";
+import { Anchor, Group, Paper, Title } from "@mantine/core";
 import classes from "./page.module.css";
 import TodoList from "@/components/TodoList/TodoList";
 // import { PrismaClient } from "@prisma/client";
@@ -12,6 +12,7 @@ import { Metadata } from "next";
 
 import { URL_API } from "@/lib/contants";
 import { prisma } from "@/utils/prisma";
+import Link from "next/link";
 
 type PageProps = {
   params?: { slug: string };
@@ -92,9 +93,14 @@ const TodoPage = async ({ searchParams }: PageProps) => {
   return (
     <div className={classes.wrapper}>
       <Paper withBorder shadow="xs" p="xl">
-        <Title mb={"md"} order={1}>
-          Todo App
-        </Title>
+        <Group justify="space-between">
+          <Title mb={"md"} order={1}>
+            Todo App
+          </Title>
+          <Anchor component={Link} href={"/"}>
+            Go back Home
+          </Anchor>
+        </Group>
         <TodoSearch />
         <TodoAddForm />
         <TodoList todos={data?.todos as any} />
