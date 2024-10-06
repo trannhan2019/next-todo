@@ -2,7 +2,7 @@
 
 import { updateTodo } from "@/services/todo.services";
 import { todoType } from "@/types/todo.type";
-import { todoAddSchema } from "@/validate-rules/todo";
+import { todoEditSchema } from "@/validate-rules/todo";
 import { Button, Card, Group, Modal, Switch, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 
@@ -28,18 +28,18 @@ const TodoEditModal = ({ opened, close, todo }: TodoEditModalProps & {}) => {
     form.setValues(todo);
   }, [opened]);
 
-  const form = useForm({
+  const form = useForm<typeof form.values>({
     mode: "controlled",
     initialValues: {
       title: todo?.title,
       isCompleted: Boolean(todo?.isCompleted) || false,
     },
-    validate: zodResolver(todoAddSchema),
+    validate: zodResolver(todoEditSchema),
   });
 
   // console.log(form.values);
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: typeof form.values) => {
     setLoading(true);
     try {
       const res = await updateTodo(todo?.id as string, values);

@@ -1,6 +1,6 @@
 import { prisma } from "@/utils/prisma";
 
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
 
@@ -60,12 +60,14 @@ export const authOptions: NextAuthOptions = {
     signIn: "/login",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user: User }) {
       if (user) token.role = user.role;
       return token;
     },
-    async session({ session, token }) {
-      if (session?.user) session.user.role = token.role;
+    async session({ session, token }: { session: any; token: any }) {
+      if (session?.user && token?.role) {
+        session.user.role = token.role;
+      }
       return session;
     },
   },
