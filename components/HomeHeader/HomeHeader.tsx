@@ -94,6 +94,7 @@ export default function HomeHeader() {
       </Menu>
     );
   };
+  console.log(session);
 
   return (
     <header className={classes.header}>
